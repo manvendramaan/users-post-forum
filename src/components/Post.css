@@ -52,7 +52,22 @@
     margin-bottom: 15px;
 }
 
+.comment-header {
+    margin-bottom: 35px;
+}
+
 .comment-title {
-    text-align: center;
-    margin-bottom: 15px;
+    float: left;
+}
+
+.delete-post {
+    float: right;
+    color: #d41b2ca3;
+    cursor: pointer;
+}
+
+.add-comment {
+    float: right;
+    color: #3cb940;
+    cursor: pointer;
 }

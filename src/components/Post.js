@@ -1,11 +1,15 @@
 import React, { useState, useEffect }  from "react";
 import { Link } from "react-router-dom";
+
+import AddComment from './AddComment';
+
 import './Post.css';
 
 function Post({ match }) {
     const id = match.params.id;
     const [post, setPost] = useState({});
     const [comments, setComments] = useState([]);
+    const [addCommentToggle, setAddCommentToggle] = useState(false);
 
     useEffect(() => {
         fetchPost();
@@ -52,6 +56,41 @@ function Post({ match }) {
         }
     }
 
+    const deleteComment = async (e, id) => {
+        e.preventDefault();
+
+        const response = await fetch(`https://jsonplaceholder.typicode.com/comments/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            const filteredComments = comments.filter((comment) => {
+                return comment.id !== id;
+            });
+
+            setComments(filteredComments);
+        }
+    }
+
+    const submitComment = async (payload) => {
+        payload.postId = post.id;
+        payload.name = payload.subject;
+
+        const response = await fetch('https://jsonplaceholder.typicode.com/comments', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+
+        if (response.ok) {
+            const comment = await response.json();
+            const updateComments = [comment, ...comments]
+            setComments(updateComments);
+        }
+    }
+
     return (
         <>
             <div className="header">
@@ -63,13 +102,23 @@ function Post({ match }) {
                 <p><span>Username: </span>{ post.username}</p>
             </div>
             <div className="post-comments-container">
-                <div className="comment-title">Comments:</div>
+                <div className="comment-header">
+                    <span className="comment-title">Comments:</span>
+                    <span className="add-comment" 
+                        onClick={ () => setAddCommentToggle(!addCommentToggle)} >
+                        Add Comment
+                    </span>
+                </div>
+                { addCommentToggle && <AddComment submitComment={ submitComment } /> }
                 { 
                     comments.map((comment) => {
                         return (<div className="post-comment-container" key={ comment.id }>
                             <p><span>Subject: </span>{ comment.name || '' }</p>
                             <p><span>Body: </span>{ comment.body || '' }</p>
-                            <p><span>Email Id: </span>{ comment.email || '' }</p>
+                            <p>
+                                <span>Email Id: </span>{ comment.email || '' }
+                                <span onClick={ (e) => deleteComment(e, comment.id) } className="delete-post">Delete</span>
+                            </p>
                         </div>)
                     })
                 }

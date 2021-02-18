@@ -1,0 +1,15 @@
+.comment-container {
+    padding: 20px;
+    border: 2px solid #d2d2d2ee;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#subject, #body, #email {
+    margin-left: 10px;
+    margin-bottom: 15px;
+}
+
+.form-content {
+    display: flex;
+}

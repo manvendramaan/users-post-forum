@@ -1,10 +1,13 @@
 import React, { useState, useEffect }  from "react";
 import { Link } from "react-router-dom";
 
+import CreatePost from './CreatePost';
+
 import './PostsList.css';
 
 function PostsList() {
     const [posts, setPosts] = useState([]);
+    const [createPostToggle, setCreatePostToggle] = useState(false);
 
     useEffect(() => {
         fetchPosts();
@@ -48,17 +51,32 @@ function PostsList() {
     const deletePost = async (e, id) => {
         e.preventDefault();
 
-        const answer = window.confirm("Are you sure to delete the post ?");
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+            method: 'DELETE',
+        });
 
-        if (answer) {
-            const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-                method: 'DELETE',
+        if (response.ok) {
+            const filteredPosts = posts.filter((post) => {
+                return post.id !== id;
             });
 
-            if (response.ok) {
-                fetchPosts();
-                alert("Post deleted successfully!");
-            }
+            setPosts(filteredPosts);
+        }
+    }
+
+    const submitPost = async (payload) => {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+
+        if (response.ok) {
+            const post = await response.json();
+            const updatePosts = [post, ...posts]
+            setPosts(updatePosts);
         }
     }
 
@@ -66,8 +84,12 @@ function PostsList() {
         <div className="posts-container">
             <div className="post-header">
                 <span className="posts-title">Posts:</span>
-                <span className="add-post">Add Post</span>
+                <span className="add-post" 
+                      onClick={ () => setCreatePostToggle(!createPostToggle)} >
+                    Add Post
+                </span>
             </div>
+            { createPostToggle && <CreatePost submitPost={ submitPost } /> }
             { 
                 posts.map((post) => {
                     return (<Link className="post-link" to={`/post/${post.id}`}>
