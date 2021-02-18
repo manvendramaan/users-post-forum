@@ -1,0 +1,39 @@
+.posts-container {
+    padding: 20px;
+    border: 2px solid #eeee;
+    margin: 20px;
+    border-radius: 5px;
+    min-height: 100vh;
+}
+
+.post-container {
+    padding: 20px;
+    border: 1px solid #d2d2d2ee;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.post-link {
+    text-decoration: none;
+    color: #3c3b3b;
+}
+
+.user-link {
+    text-decoration: none;
+    color: #2CA9F7;
+}
+
+.delete-post {
+    float: right;
+    color: #d41b2ca3;
+}
+
+.post-header {
+    margin-bottom: 15px;
+    color: #3c3b3b;
+}
+
+.add-post {
+    float: right;
+    color: #3cb940;
+}

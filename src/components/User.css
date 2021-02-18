@@ -1,0 +1,37 @@
+.header {
+    margin: auto auto;
+    width: 50%;
+    border: 2px solid #eeee;
+    border-radius: 5px;
+    margin-top: 2%;
+    padding: 20px;
+    text-align: center;    
+}
+
+.user-detail-container {
+    margin: auto auto;
+    width: 50%;
+    border: 2px solid #eeee;
+    border-radius: 5px;
+    margin-top: 2%;
+    padding: 20px;
+    text-align: center;
+}
+
+.user-detail-back-link {
+    float: left;
+    text-decoration: none;
+    color: #3c3b3b;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
