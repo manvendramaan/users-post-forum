@@ -8,8 +8,15 @@
 #title, #body, #userId, #username {
     margin-left: 10px;
     margin-bottom: 15px;
+    padding: 5px;
 }
 
 .form-content {
     display: flex;
+}
+
+.submit-btn {
+    padding: 8px;
+    background: #efefefee;
+    border: none;
 }

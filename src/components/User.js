@@ -32,13 +32,17 @@ function User({ match }) {
                 <Link className="user-detail-back-link" to={`/`}><span><i className="arrow left"></i> Back</span></Link>
                 <span>User Detail:</span>
             </div>
-            <div className="user-detail-container">
+            { Object.keys(user).length > 0 && <div className="user-detail-container">
                 <p><span>Username: </span>{ user.username}</p>
                 <p><span>Full name: </span>{ user.name}</p>
                 <p><span>Email Id: </span>{ user.email}</p>
                 <p><span>Website: </span>{ user.website}</p>
                 <p><span>Company name: </span>{ user.company && user.company.name}</p>
             </div>
+            }
+            { Object.keys(user).length === 0 && <div className="loader-container">
+                <div className="loader"></div>
+            </div> }
         </>
     );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from "react";
 import { Link } from "react-router-dom";
 
 import CreatePost from './CreatePost';
+import SearchBar from './SearchBar';
 
 import './PostsList.css';
 
@@ -65,6 +66,8 @@ function PostsList() {
     }
 
     const submitPost = async (payload) => {
+        payload.userId = Math.floor(Math.random() * Math.floor(1000));
+        
         const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'POST',
             body: JSON.stringify(payload),
@@ -84,14 +87,15 @@ function PostsList() {
         <div className="posts-container">
             <div className="post-header">
                 <span className="posts-title">Posts:</span>
+                <SearchBar />
                 <span className="add-post" 
                       onClick={ () => setCreatePostToggle(!createPostToggle)} >
                     Add Post
                 </span>
             </div>
             { createPostToggle && <CreatePost submitPost={ submitPost } /> }
-            { 
-                posts.map((post) => {
+            {
+                posts.length > 0 && posts.map((post) => {
                     return (<Link className="post-link" to={`/post/${post.id}`}>
                         <div className="post-container" key={ post.id }>
                             <p><span>Title: </span>{ post.title || '' }</p>
@@ -104,6 +108,9 @@ function PostsList() {
                     </Link>)
                 })
             }
+            { posts.length === 0 && <div className="loader-container">
+                <div className="loader"></div>
+            </div> }
         </div>
     );
 }

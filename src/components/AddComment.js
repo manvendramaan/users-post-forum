@@ -58,7 +58,7 @@ function AddComment({ submitComment }) {
             </div>
 
             <div className="form-content">
-                <input type="submit" onClick={submitCommentPost} value="Submit"></input>
+                <input type="submit" className="submit-btn" onClick={submitCommentPost} value="Submit"></input>
             </div>
         </div>
     );

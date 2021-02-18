@@ -97,11 +97,15 @@ function Post({ match }) {
                 <Link className="post-detail-back-link" to={`/`}><span><i className="arrow left"></i> Back</span></Link>
                 <span>Post Detail:</span>
             </div>
-            <div className="post-detail-container">
+            { Object.keys(post).length > 0 && <div className="post-detail-container">
                 <p><span>Title: </span>{ post.title}</p>
                 <p><span>Username: </span>{ post.username}</p>
             </div>
-            <div className="post-comments-container">
+            }
+            { Object.keys(post).length === 0 && <div className="loader-container">
+                <div className="loader"></div>
+            </div> }
+            { comments.length > 0 && <div className="post-comments-container">
                 <div className="comment-header">
                     <span className="comment-title">Comments:</span>
                     <span className="add-comment" 
@@ -123,6 +127,7 @@ function Post({ match }) {
                     })
                 }
             </div>
+            }
         </>
     );
 }
