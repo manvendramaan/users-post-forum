@@ -96,8 +96,8 @@ function PostsList() {
             { createPostToggle && <CreatePost submitPost={ submitPost } /> }
             {
                 posts.length > 0 && posts.map((post) => {
-                    return (<Link className="post-link" to={`/post/${post.id}`}>
-                        <div className="post-container" key={ post.id }>
+                    return (<Link className="post-link" key={ post.id } to={`/post/${post.id}`}>
+                        <div className="post-container">
                             <p><span>Title: </span>{ post.title || '' }</p>
                             <p>
                                 <span>Username: </span>

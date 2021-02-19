@@ -30,7 +30,7 @@ function SearchBar() {
     }
 
     return (
-        <form className="search-form" autocomplete="off">
+        <form className="search-form" autoComplete="off">
             <span className="autocomplete">
                 <input ref={ usernameRef } onChange={ handleSearchBar } type="text" id="search-username" name="username" placeholder="Search Username"/>
                 { users.length > 0 && 
