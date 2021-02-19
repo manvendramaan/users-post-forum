@@ -1,10 +1,14 @@
 # USERS POST FORUM
 
-A forum to view/add/delete user posts and comments
+A forum to view/add/delete user posts and comments using ReactJS
 
 Used JSON Placeholder for API - https://jsonplaceholder.typicode.com/
 
 ## Available Scripts
+
+Firstly install all the dependencies:
+
+### `npm install`
 
 In the project directory, you can run:
 
